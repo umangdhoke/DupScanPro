@@ -1,0 +1,140 @@
+DupScan Pro 1.1 — Duplicate File Finder
+========================================
+
+A native Windows app that finds files with identical CONTENT (not just the same
+name), lets you review every copy, and removes only the copies you choose.
+
+INSTALL
+-------
+1. Double-click DupScanPro-Setup-1.1.0.exe.
+2. Follow the setup wizard.
+3. On Windows 10/11, .NET Framework 4.8 is normally already present. If it is
+   missing, this setup contains the complete offline .NET 4.8 installer and
+   installs it automatically before DupScan Pro.
+4. Choose whether you want a Desktop shortcut. A Start Menu shortcut and a
+   standard uninstaller are always created.
+5. Click Install. The app is installed to:
+   C:\Program Files\DupScan Pro
+6. At the end you can launch DupScan Pro immediately.
+
+No internet connection is needed during setup. No Python, Node, Java or extra
+runtime is required.
+
+If you prefer not to install, DupScan.exe is also a portable single-file build.
+Run it directly; it does not write into Program Files.
+
+QUICK START
+-----------
+1. Add a folder with "Add folder", or a whole drive with "Add drive".
+   You can also drag folders onto the window.
+2. Leave the defaults, or adjust:
+   - Skip Windows / Program Files (recommended)
+   - Include hidden and system files
+   - Include empty (0-byte) files
+   - Minimum file size (default 1 KB)
+3. Click "Start scan".
+4. Review the groups. Green KEEP rows stay; red DELETE rows will be removed.
+5. Do one of these:
+   - Click "Auto-select" to keep the newest copy in each group.
+   - Use "Keep rules" to keep the oldest / shortest path / first alphabetical.
+   - Click individual checkboxes.
+   - Right-click a row and choose "Keep this copy, remove the others".
+6. Click "Remove N files".
+7. Choose:
+   - "Move to Recycle Bin" (recommended; recoverable until you empty the bin)
+   - "Delete permanently" (requires the extra confirmation checkbox)
+8. Review the result window. The audit log is in:
+   %LOCALAPPDATA%\DupScan\Logs\
+
+IMPORTANT SAFETY RULES
+----------------------
+- DupScan Pro never selects every copy in a group for deletion.
+- Nothing is deleted during a scan.
+- The confirmation button is briefly disabled so a double-click cannot bypass it.
+- Before deleting, the app re-checks size, timestamp, file identity and full
+  SHA-256 content. Files that changed since the scan are skipped.
+- Windows, Program Files and ProgramData paths are blocked from deletion.
+- Recycle Bin is the default and is only available on local fixed drives.
+- "Delete permanently" cannot be undone.
+
+OPTIONS
+-------
+- Skip Windows and Program Files (on by default; recommended)
+- Include hidden and system files (off by default)
+- Include empty (0-byte) files (off by default)
+- Minimum file size (default 1 KB; 0 KB compares every non-empty file)
+- Verify content again before deleting (on by default; slower but safer)
+
+WHAT "DUPLICATE" MEANS
+----------------------
+Files are grouped by size, then a quick fingerprint, then a full SHA-256 content
+hash. A match means the bytes are identical. File names, dates and extensions
+do not matter. NTFS hard links are detected and left out because deleting a hard
+link path does not free disk space.
+
+REPORTS
+-------
+"Export report" saves a standalone HTML report or a CSV spreadsheet. The report
+includes groups, every path, sizes, dates, SHA-256 hashes, and KEEP/DELETE marks.
+
+SUPPORT SCREEN
+--------------
+After a cleanup that removes at least one file, DupScan Pro shows a support
+screen with a UPI QR code and UPI ID:
+
+    9691701245@ptaxis
+
+The message is:
+"This software is free because I believe in open access, but it runs on
+caffeine, late nights, and passion. If this tool saved you time or made your day
+easier, consider buying me a coffee - even Rs 10 or Rs 99 goes a long way. It
+keeps the code flowing and the updates coming."
+
+The reminder appears twice after each completed cleanup. Clicking "Maybe later"
+(or closing the window) shows the second reminder; "I donated" closes it for
+that cleanup. DupScan Pro never processes a payment and never stores payment
+details. Your UPI app handles the transaction.
+
+SHORTCUTS
+---------
+F5           Start scan
+Ctrl+O       Add folder
+Ctrl+E       Export report
+Ctrl+F       Focus search
+Esc          Cancel scan / clear search
+Space        Toggle current row
+Delete       Remove selected (grid focused)
+Enter        Open current file
+
+UNINSTALL
+---------
+Use Settings > Apps > Installed apps > DupScan Pro > Uninstall, or
+Start Menu > DupScan Pro > Uninstall DupScan Pro.
+
+Your scan logs and settings are kept in %LOCALAPPDATA%\DupScan. They are not
+removed automatically, so you can keep your audit history.
+
+TROUBLESHOOTING
+---------------
+- "N skipped items": some folders/files could not be read. Click the link in the
+  bottom bar for details. Run as administrator only if you deliberately need
+  protected areas.
+- Recycle Bin error: the drive may not have a Recycle Bin (network/removable).
+  Use permanent delete only if you are sure.
+- A whole-drive scan is slow: that is normal. Raise the minimum file size, or
+  scan one folder at a time.
+- SmartScreen warning: the setup is new and unsigned. Choose More info ->
+  Run anyway.
+- .NET setup message: restart Windows if the .NET installer requested it, then
+  run DupScan Pro Setup again.
+
+FILES
+-----
+Installed app:  C:\Program Files\DupScan Pro\DupScan.exe
+Settings:       %LOCALAPPDATA%\DupScan\settings.ini
+Deletion log:   %LOCALAPPDATA%\DupScan\Logs\deletions-YYYY-MM-DD.csv
+Crash log:      %LOCALAPPDATA%\DupScan\Logs\crash.log
+
+No telemetry. No network access. No installer downloads needed.
+
+Version 1.1.0 Pro
